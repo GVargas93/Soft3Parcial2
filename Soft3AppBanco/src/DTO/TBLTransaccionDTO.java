@@ -1,21 +1,26 @@
 package DTO;
 
-public class tblTransaccionDTO {
+import java.sql.Date;
+
+public class TBLTransaccionDTO {
 
     private int Transaccion_iD;
-    private String FechaTransaccion;
+    private Date FechaTransaccion;
     private String Monto;
+//    private String MotivoTransaccion;
     private int Categoria_iD_FK;
+    private int Cuenta_iD_FK;
 
-    public tblTransaccionDTO() {
-
+    public int getCuenta_iD_FK() {
+        return Cuenta_iD_FK;
     }
 
-    public tblTransaccionDTO(int Transaccion_iD, String FechaTransaccion, String Monto, int Categoria_iD_FK) {
-        this.Transaccion_iD = Transaccion_iD;
-        this.FechaTransaccion = FechaTransaccion;
-        this.Monto = Monto;
-        this.Categoria_iD_FK = Categoria_iD_FK;
+    public void setCuenta_iD_FK(int Cuenta_iD_FK) {
+        this.Cuenta_iD_FK = Cuenta_iD_FK;
+    }
+
+    public TBLTransaccionDTO() {
+
     }
 
     public int getTransaccion_iD() {
@@ -26,11 +31,11 @@ public class tblTransaccionDTO {
         this.Transaccion_iD = Transaccion_iD;
     }
 
-    public String getFechaTransaccion() {
+    public Date getFechaTransaccion() {
         return FechaTransaccion;
     }
 
-    public void setFechaTransaccion(String FechaTransaccion) {
+    public void setFechaTransaccion(Date FechaTransaccion) {
         this.FechaTransaccion = FechaTransaccion;
     }
 
