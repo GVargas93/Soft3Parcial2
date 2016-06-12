@@ -1,22 +1,26 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package DAO;
 
-import DTO.TBLTransaccionDTO;
+import DTO.tblCuentaDTO;
 import java.util.ArrayList;
 
 /**
  *
- * @author Gerardo
+ * @author Jose Clavijo
  */
-public class TransaccionDaoSQLServer extends TransaccionDao{
+public class CuentaDaoSQLServer extends Cuentadao{
 
     @Override
-    public int insert(TBLTransaccionDTO obj) throws Exception {
+    public int insert(tblCuentaDTO obj) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(TBLTransaccionDTO obj) throws Exception {
+    public void update(tblCuentaDTO obj) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -26,17 +30,17 @@ public class TransaccionDaoSQLServer extends TransaccionDao{
     }
 
     @Override
-    public ArrayList<TBLTransaccionDTO> getList() {
+    public ArrayList<tblCuentaDTO> getList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public TBLTransaccionDTO get(int id) {
+    public tblCuentaDTO get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ArrayList<TBLTransaccionDTO> getListByTipo(String tipo) {
+    public ArrayList<tblCuentaDTO> getListByTipo(String tipo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
