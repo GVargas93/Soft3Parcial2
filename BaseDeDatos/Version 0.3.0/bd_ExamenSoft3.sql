@@ -35,30 +35,19 @@ GO
 PRINT 'INICIANDO CREACION DE TABLAS'
 ------------------------------------- Soy Una Barra Separadora :) ----------------------------------------
 ------------------------------------- Soy Una Barra Separadora  :) ----------------------------------------
-Print 'Iniciando 4 Tabla-Tbl_Tranferencia'
+Print 'Iniciando 4 Tabla-Tbl_Transferencia'
 
-CREATE TABLE [DML].[Tbl_Tranferencia]
+CREATE TABLE [DML].[Tbl_Transferencia]
 (
 Transferencia_iD			int identity(1,1) not null,
 FechaTransferencia				DATE not null,
 Monto 					varchar(50) not null,
-Categoria_iD_Fk					int not null,
+MotivoTransferencia					varchar(250) not null,
+Cuenta_iD_Destino					int not null,
+Cuenta_iD_Origen					int not null
 Constraint	Pk_Tbl_Tranferencia primary key (Transferencia_iD),						
 )
 Go
-Print 'Finalizando 4 Tabla-Tbl_Tranferencia'
+Print 'Finalizando 4 Tabla-Tbl_Transferencia'
 
 ------------------------------------- Soy Una Barra Separadora :) ----------------------------------------
------------------------------------- Soy Una Barra Separadora :) ----------------------------------------
-Print 'Iniciando 3 Tabla-Tbl_CategoriaTransferencia'
-
-CREATE TABLE [DML].[Tbl_CategoriaTransferencia]
-(
-Categoria_iD			int identity(1,1) not null,
-TipoCategoria				varchar(250) not null,
-CONSTRAINT PK_Tbl_CategoriaTransferencia primary key(Categoria_iD),
-)
-Go
-Print 'Finalizando 3 Tabla-Tbl_CategoriaTransferencia'
-
-------------------------------------- Soy Una Barra Separadora  :) ----------------------------------------

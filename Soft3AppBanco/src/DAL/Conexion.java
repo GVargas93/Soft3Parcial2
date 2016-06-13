@@ -1,4 +1,4 @@
-package Conexion;
+package DAL;
 
 import java.sql.Connection;
 
@@ -17,7 +17,7 @@ public abstract class Conexion implements IConexion {
         if (objSingleton == null) {
             Configuracion config = Configuracion.getConfiguracion();
             if (config.getDbEngine().equals("SQLServer")) {
-                objSingleton = ConexionSQLServer.getOrCreate();
+                objSingleton = ConexionSQL.getOrCreate();
             }
 
         }
@@ -49,14 +49,6 @@ public abstract class Conexion implements IConexion {
         return userName;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public Connection getObjConnection() {
         return objConnection;
     }
@@ -64,5 +56,6 @@ public abstract class Conexion implements IConexion {
     public void setObjConnection(Connection objConnection) {
         this.objConnection = objConnection;
     }
-
+    
+    
 }

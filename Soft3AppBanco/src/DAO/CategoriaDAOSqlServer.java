@@ -5,22 +5,22 @@
  */
 package DAO;
 
-import DTO.CuentaDTO;
+import DTO.CategoriaDTO;
 import java.util.ArrayList;
 
 /**
  *
  * @author Gerardo
  */
-public class CuentaDAOSqlServer extends CuentaDAO {
+public class CategoriaDAOSqlServer extends CategoriaDAO{
 
     @Override
-    public int insert(CuentaDTO obj) throws Exception {
+    public int insert(CategoriaDTO obj) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(CuentaDTO obj) throws Exception {
+    public void update(CategoriaDTO obj) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -30,22 +30,22 @@ public class CuentaDAOSqlServer extends CuentaDAO {
     }
 
     @Override
-    public ArrayList<CuentaDTO> getList() {
+    public ArrayList<CategoriaDTO> getList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ArrayList<CuentaDTO> ListCategoria() {
+    public ArrayList<CategoriaDTO> ListCategoria() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public CuentaDTO get(int id) {
+    public CategoriaDTO get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public CuentaDTO obtenernombreid(String nombrecategoria) {
+    public CategoriaDTO obtenernombreid(String nombrecategoria) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

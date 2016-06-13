@@ -9,27 +9,23 @@ use BD_ExamenSoft3
 
 ------------------------------------- Soy Una Barra Separadora  :) ----------------------------------------
 PRINT '1 INICIA PROCEDURE Insertar_Cliente 1'
-IF EXISTS (SELECT * FROM sysobjects WHERE id = object_id(N'[DML].[Ins_Transacciones]') 
+IF EXISTS (SELECT * FROM sysobjects WHERE id = object_id(N'[DML].[Ins_Categoria]') 
 AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
 BEGIN
-	DROP PROCEDURE [DML].[Ins_Transacciones]
+	DROP PROCEDURE [DML].[Ins_Categoria]
 END
 GO
 
-CREATE PROCEDURE [DML].[Ins_Transacciones]
-@Transaccion_iD			int OUTPUT,
-@FechaTransaccion		Date,
-@Monto					varchar(50),
-@MotivoTransaccion 		varchar(250),
-@Categoria_iD_Fk       	int,
-@Cuenta_iD_Fk       	int
+CREATE PROCEDURE [DML].[Ins_Categoria]
+@Categoria_iD			int OUTPUT,
+@TipoCategoria			varchar(250)
 
 AS
 BEGIN
-INSERT INTO [DML].[Tbl_Transacciones]         
-values (@FechaTransaccion,@Monto,@MotivoTransaccion,@Categoria_iD_Fk,@Cuenta_iD_Fk)
-SET @Transaccion_iD	 = SCOPE_IDENTITY();
-select @Transaccion_iD = @@IDENTITY
+INSERT INTO [DML].[Tbl_Categoria]         
+values (@TipoCategoria)
+SET @Categoria_iD	 = SCOPE_IDENTITY();
+select @Categoria_iD = @@IDENTITY
 END
 GO
 PRINT '1 FINALIZA PROCEDURE Insertar_Cliente 1'
@@ -40,21 +36,17 @@ PRINT '2 INICIA PROCEDURE Upd_Cliente 2'
 IF EXISTS (SELECT * FROM sysobjects WHERE id = object_id(N'[DML].[Upd_Transaccion]') 
 AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
 BEGIN
-	DROP PROCEDURE [DML].[Upd_Transaccion]
+	DROP PROCEDURE [DML].[Upd_Categoria]
 END
 GO
 
-CREATE PROCEDURE [DML].[Upd_Transaccion]
-@Transaccion_iD			int,
-@FechaTransaccion		Date,
-@Monto					varchar(50),
-@MotivoTransaccion 		varchar(250),
-@Categoria_iD_Fk       	int,
-@Cuenta_iD_Fk       	int
+CREATE PROCEDURE [DML].[Upd_Categoria]
+@Categoria_iD			int,
+@TipoCategoria			varchar(250)
 as
 begin
-update [DML].[Tbl_Transacciones] set FechaTransaccion = @FechaTransaccion, Monto = @Monto,MotivoTransaccion = @MotivoTransaccion, Categoria_iD_Fk=@Categoria_iD_Fk,  Cuenta_iD_Fk =@Cuenta_iD_Fk
-where  Transaccion_iD = @Transaccion_iD;
+update [DML].[Tbl_Categoria] set TipoCategoria = @TipoCategoria
+where  Categoria_iD = @Categoria_iD;
 end
 go
 
@@ -69,16 +61,16 @@ PRINT '3 INICIA PROCEDURE Drop_Cliente 3'
 IF EXISTS (SELECT * FROM sysobjects WHERE id = object_id(N'[DML].[Drop_Transaccion]') 
 AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
 BEGIN
-	DROP PROCEDURE [DML].[Drop_Transaccion]
+	DROP PROCEDURE [DML].[Drop_Categoria]
 END
 GO
 
-CREATE PROCEDURE [DML].[Drop_Transaccion]
-@Transaccion_iD			int
+CREATE PROCEDURE [DML].[Drop_Categoria]
+@Categoria_iD			int
 AS
 BEGIN
-delete from [DML].[Tbl_Transacciones]
-WHERE Transaccion_iD = @Transaccion_iD;
+delete from [DML].[Tbl_Categoria]
+WHERE Categoria_iD = @Categoria_iD;
 end
 go
 PRINT '3 FINALIZA PROCEDURE Drop_Cliente 3'
@@ -87,20 +79,20 @@ PRINT '3 FINALIZA PROCEDURE Drop_Cliente 3'
 -- exec [DML].Drop_Cliente 9
 -- =================================================
 ------------------------------------- Soy Una Barra Separadora  :) ----------------------------------------
-PRINT '1 INICIA PROCEDURE Select_Producto 0'
-IF EXISTS (SELECT * FROM sysobjects WHERE id = object_id(N'[DML].[Select_Transaccion]') 
-AND OBJECTPROPERTY(id, N'Select_Producto') = 1)
+PRINT '1 INICIA PROCEDURE Select_Categoria 0'
+IF EXISTS (SELECT * FROM sysobjects WHERE id = object_id(N'[DML].[Select_Categoria]') 
+AND OBJECTPROPERTY(id, N'Select_Categoria') = 1)
 BEGIN
-	DROP PROCEDURE [DML].[Select_Transaccion]
+	DROP PROCEDURE [DML].[Select_Categoria]
 END
 GO
 
-CREATE PROCEDURE [DML].[Select_Transaccion]
+CREATE PROCEDURE [DML].[Select_Categoria]
 AS
 BEGIN
 SELECT        *
-FROM           [DML].[Tbl_Transacciones]
+FROM           [DML].[Tbl_Categoria]
 END
 GO
-PRINT '1 FINALIZA PROCEDURE Select_Producto 0'
+PRINT '1 FINALIZA PROCEDURE Select_Categoria 0'
 ------------------------------------- Soy Una Barra Separadora  :) ----------------------------------------

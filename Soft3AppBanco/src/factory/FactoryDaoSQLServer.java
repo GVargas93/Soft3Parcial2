@@ -1,37 +1,37 @@
-package factory;
+package Factory;
 
-import dao.*;
+import DAL.Configuracion;
+import DAO.*;
 
-public class FactoryDaoSQLServer extends FactoryDao {
+class FactoryDaoSQLServer extends FactoryDao {
 
     private FactoryDaoSQLServer() {
-        dbEngine = "SQLServer";
+        dbEngine = "MySQL";
     }
 
     public static FactoryDao getFactoryInstance() {
-        if (instancia == null) {
-            instancia = new FactoryDaoSQLServer();
-        }
+        instancia = new FactoryDaoSQLServer();
         return instancia;
     }
 
     @Override
-    public CategoriaDao getNewCategoriaDao() {
-        return new CategoriaDaoSQLServer();
+    public CuentaDAO getNewCuentaDAO() {
+        return new CuentaDAOSqlServer();
     }
 
     @Override
-    public CuentaDao getNewCuentaDao() {
-        return new CuentaDaoSQLServer();
+    public CategoriaDAO getNewCategoriaDao() {
+        return new CategoriaDAOSqlServer();
     }
 
     @Override
-    public TransferenciaDao getNewTransferenciaDao() {
-        return new TransferenciaDaoSQLServer();
+    public TransaccionDAO getNewTransaccionDAO() {
+        return new TransaccionDAOSqlServer();
     }
 
     @Override
-    public TransaccionDao getNewTransaccionDao() {
-        return new TransaccionDaoSQLServer();
+    public TransferenciaDAO getNewTransferenciaDAO() {
+        return new TransferenciaDAOSqlServer();
     }
+    
 }

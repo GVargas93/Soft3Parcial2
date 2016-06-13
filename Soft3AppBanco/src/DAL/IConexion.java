@@ -1,38 +1,19 @@
-package Conexion;
+package DAL;
 
 import java.sql.ResultSet;
 
+/**
+ *
+ * @author Jose Carlos Gutierrez
+ */
 public interface IConexion {
 
-    /**
-     * Conecta a la base de datos. La manera de trabajo es tener un pool de
-     * conexiones abiertas y solamente se utiliza una de ellas y se la libera.
-     * Entonces, cada vez que se pide una conexión, en realidad se saca una y
-     * existente del pool de conexiones. (Oracle, MySql, SqlServer,...) todos
-     * trabajan así en los drivers tanto para Java como para .NET
-     *
-     */
     public void conectar();
 
-    /**
-     * Una marca que se envía a la conexión propiamente dicha para que no
-     * realice el commit cuando se realiza un query.
-     *
-     */
     public void comenzarTransaccion();
 
-    /**
-     * Marca que se le envía a la conexión real para confirmar una transacción.
-     * Pensar por ejemplo en una transacción de tipo maestro detalle.
-     *
-     */
     public void terminarTransaccion();
 
-    /**
-     * Libera la conexión de la base de datos y la devuelve al pool de
-     * conexiones de la misma.
-     *
-     */
     public void desconectar();
 
     /**
@@ -44,7 +25,7 @@ public interface IConexion {
      * @param query La ocnsulta en sql estándar, exclusivamente de tipo Select
      * @return El resultado en forma de objeto.
      */
-    public ResultSet ejecutar(String query);
+    public ResultSet ejecutarSelect(String query);
 
     /**
      * La ejecución de un query de tipo Update, insert o delete.
@@ -69,11 +50,5 @@ public interface IConexion {
      * @return true o false
      */
     public boolean estaConectado();
-    
-    
-    
-    public void ejecutarConsulta(String sql);
-    
-    public ResultSet obtenerConsulta(String sql);
 
 }

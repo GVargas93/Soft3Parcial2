@@ -5,24 +5,26 @@
  */
 package DAO;
 
-
-import DTO.tblCuentaDTO;
+import DTO.CuentaDTO;
 import java.util.ArrayList;
 
 /**
  *
- * @author Jose Clavijo
+ * @author Gerardo
  */
-public abstract class Cuentadao {
-    public abstract int insert(tblCuentaDTO obj) throws Exception;
+public abstract class CuentaDAO {
 
-    public abstract void update(tblCuentaDTO obj) throws Exception;
+    public abstract int insert(CuentaDTO obj) throws Exception;
+
+    public abstract void update(CuentaDTO obj) throws Exception;
 
     public abstract void delete(int id);
 
-    public abstract ArrayList<tblCuentaDTO> getList();
+    public abstract ArrayList<CuentaDTO> getList();
 
-    public abstract tblCuentaDTO get(int id);
+    public abstract ArrayList<CuentaDTO> ListCategoria();
 
-    public abstract ArrayList<tblCuentaDTO> getListByTipo(String tipo); 
+    public abstract CuentaDTO get(int id);
+
+    public abstract CuentaDTO obtenernombreid(String nombrecategoria);
 }

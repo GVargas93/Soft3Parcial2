@@ -11,15 +11,13 @@
 use BD_ExamenSoft3
 
 alter table [DML].[Tbl_Transacciones]
-add constraint FK_Tbl_CategoriaTransacciones foreign key(Categoria_iD_FK) references [DML].[Tbl_CategoriaTransaccion](Categoria_iD)	
+add constraint FK_Tbl_CategoriaTransacciones foreign key(Categoria_iD_FK) references [DML].[Tbl_Categoria](Categoria_iD)	
 
-alter table [DML].[Tbl_Tranferencia]
-add constraint FK_Tbl_CategoriaTransferencias foreign key(Categoria_iD_FK) references [DML].[Tbl_CategoriaTransferencia](Categoria_iD)	
+alter table [DML].[Tbl_Transferencia]
+add constraint FK_Tbl_CuentaDestino foreign key(Cuenta_iD_Destino) references [DML].[Tbl_Cuentas](Cuenta_iD)
 
-alter table [DML].[Tbl_Tranferencia] add Cuenta_iD_FK int not NULL; 
-
-alter table [DML].[Tbl_Tranferencia]
-add constraint FK_Tbl_CuentaTransferencias foreign key(Cuenta_iD_FK) references [DML].[Tbl_Cuentas](Cuenta_iD)	
+alter table [DML].[Tbl_Transferencia]
+add constraint FK_Tbl_CuentaOrigen foreign key(Cuenta_iD_Origen) references [DML].[Tbl_Cuentas](Cuenta_iD)	
 
 alter table [DML].[Tbl_Transacciones] add Cuenta_iD_FK int not NULL; 
 

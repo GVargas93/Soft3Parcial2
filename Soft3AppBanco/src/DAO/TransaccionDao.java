@@ -5,24 +5,22 @@
  */
 package DAO;
 
-import DTO.TBLTransaccionDTO;
+import DTO.TransaccionDTO;
 import java.util.ArrayList;
 
 /**
  *
  * @author Gerardo
  */
-public abstract class TransaccionDao {
+public abstract class TransaccionDAO {
 
-    public abstract int insert(TBLTransaccionDTO obj) throws Exception;
+    public abstract int insert(TransaccionDTO obj) throws Exception;
 
-    public abstract void update(TBLTransaccionDTO obj) throws Exception;
+    public abstract void update(TransaccionDTO obj) throws Exception;
 
     public abstract void delete(int id);
 
-    public abstract ArrayList<TBLTransaccionDTO> getList();
+    public abstract ArrayList<TransaccionDTO> getList();
 
-    public abstract TBLTransaccionDTO get(int id);
-
-    public abstract ArrayList<TBLTransaccionDTO> getListByTipo(String tipo);
+    public abstract TransaccionDTO get(int id);
 }

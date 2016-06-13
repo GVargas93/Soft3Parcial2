@@ -1,10 +1,10 @@
 package soft3appbanco;
 
-import DAO.TransaccionDao;
-import DTO.TBLCategoriaTransaccionDTO;
-import factory.FactoryDao;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import DAO.TransaccionDAO;
+import DTO.TransaccionDTO;
+import Factory.FactoryDao;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -37,23 +37,23 @@ public class TransaccionIntFrm extends javax.swing.JInternalFrame {
         jlblMonto = new javax.swing.JLabel();
         jTxtMonto = new javax.swing.JTextField();
         jlblFecha = new javax.swing.JLabel();
-        JDateFecha = new com.toedter.calendar.JDateChooser();
         btnTransaccion = new javax.swing.JButton();
         jlblMotivoTransaccion = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtxAreaMotivo = new javax.swing.JTextArea();
+        jfTxtFecha = new javax.swing.JFormattedTextField();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        setClosable(true);
+        setMaximizable(true);
+        setResizable(true);
+
         lblNroCuenta.setText("Nro Cuenta :");
 
-        jCBoxCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jlblTransaccion.setText("Transaccion :");
-
-        jCBoxTransaccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jlblMonto.setText("Monto");
 
@@ -90,10 +90,10 @@ public class TransaccionIntFrm extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jfTxtFecha, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jTxtMonto, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jCBoxCuenta, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jCBoxTransaccion, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(JDateFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))))
+                                .addComponent(jCBoxCuenta, javax.swing.GroupLayout.Alignment.LEADING, 0, 169, Short.MAX_VALUE)
+                                .addComponent(jCBoxTransaccion, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(175, 175, 175)
                         .addComponent(btnTransaccion)))
@@ -116,17 +116,16 @@ public class TransaccionIntFrm extends javax.swing.JInternalFrame {
                     .addComponent(jTxtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlblFecha)
-                    .addComponent(JDateFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
+                        .addComponent(jlblFecha)
+                        .addGap(51, 51, 51)
                         .addComponent(jlblMotivoTransaccion)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addComponent(jfTxtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                         .addComponent(btnTransaccion)
                         .addGap(34, 34, 34))))
         );
@@ -136,12 +135,30 @@ public class TransaccionIntFrm extends javax.swing.JInternalFrame {
 
     private void btnTransaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransaccionActionPerformed
         // TODO add your handling code here:
+        //System.out.println(cmbidcategoria.getSelectedItem().toString());
+        try {
+            System.out.println("asasd");
+            TransaccionDAO objDao = FactoryDao.getFactoryInstance().getNewTransaccionDAO();
+            TransaccionDTO obj = new TransaccionDTO();
+            obj.setMonto(jTxtMonto.getText());
+            obj.setFecha(jfTxtFecha.getText());
+            obj.setMotivoTransaccion(jtxAreaMotivo.getText());
+            obj.setCategoriaIDFK(1);
+            obj.setCuentaIDFK(1);
 
+            System.out.println("antes");
+            objDao.insert(obj);
+            System.out.println("despues");
+            System.out.println(obj);
+
+        } catch (Exception ex) {
+            System.out.println("No Inserto NI MIERDA");
+            //Logger.getLogger(TransaccionGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnTransaccionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser JDateFecha;
     private javax.swing.JButton btnTransaccion;
     private javax.swing.JComboBox<String> jCBoxCuenta;
     private javax.swing.JComboBox<String> jCBoxTransaccion;
@@ -149,6 +166,7 @@ public class TransaccionIntFrm extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTxtMonto;
+    private javax.swing.JFormattedTextField jfTxtFecha;
     private javax.swing.JLabel jlblFecha;
     private javax.swing.JLabel jlblMonto;
     private javax.swing.JLabel jlblMotivoTransaccion;

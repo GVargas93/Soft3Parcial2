@@ -1,20 +1,22 @@
-package Conexion;
+package DAL;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class ConexionSQLServer extends Conexion {
+class ConexionSQL extends Conexion {
 
     public static Conexion getOrCreate() {
         if (objSingleton == null) {
-            objSingleton = new ConexionSQLServer();
+            objSingleton = new ConexionSQL();
         }
         return objSingleton;
     }
 
-    private ConexionSQLServer() {
+    private ConexionSQL() {
         Configuracion objConfiguracion
                 = Configuracion.getConfiguracion();
         this.host = objConfiguracion.getDbHost();
@@ -25,30 +27,36 @@ public class ConexionSQLServer extends Conexion {
         this.password = objConfiguracion.getDbPassword();
     }
 
-    @Override
     public void conectar() {
         if (this.estaConectado()) {
             return;
         } else {
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
-            } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-                System.out.println("Class not Found Exception: " + e.toString());
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ConexionSQL.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(ConexionSQL.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
                 String sUrl = "jdbc:sqlserver://" + this.host + ":" + this.port + ";"
                         + "databaseName= " + this.dataBase + ";";
+                System.out.println(sUrl);
                 objConnection = DriverManager.getConnection(sUrl, userName, password);
-                if (objConnection != null) {
-                    System.out.println("Conexión a base de datos " + this.dataBase + " : OK");
+                if (objConnection == null) {
+                    System.out.println("conexion fallida" + this.dataBase + this.password);
+                } else {
+                    System.out.println("conexion con exito " + this.dataBase);
                 }
             } catch (SQLException e) {
-                System.out.println("SQL Exception: " + e.toString());
+                e.printStackTrace();
             }
         }
+
     }
 
-    @Override
     public void comenzarTransaccion() {
         if (!this.estaConectado()) {
             this.conectar();
@@ -57,40 +65,39 @@ public class ConexionSQLServer extends Conexion {
         try {
             objConnection.setAutoCommit(false);
         } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    @Override
     public void terminarTransaccion() {
         try {
             objConnection.commit();
         } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    @Override
     public void desconectar() {
         try {
             if (this.estaConectado()) {
                 objConnection.close();
             }
         } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    @Override
-    public ResultSet ejecutar(String query) {
+    public ResultSet ejecutarSelect(String query) {
         try {
             Statement stmt = objConnection.createStatement();
             ResultSet res = stmt.executeQuery(query);
             return res;
         } catch (SQLException e) {
-            System.out.println("Error en el metodo ejecutar(): " + e.toString());
+            e.printStackTrace();
             return null;
         }
     }
 
-    @Override
     public boolean estaConectado() {
         if (this.objConnection == null) {
             return false;
@@ -106,19 +113,17 @@ public class ConexionSQLServer extends Conexion {
         return true;
     }
 
-    @Override
     public int ejecutarSimple(String query) {
         try {
             Statement stmt = objConnection.createStatement();
             int nb = stmt.executeUpdate(query);
             return nb;
         } catch (SQLException e) {
-            System.out.println("Error en ejecutarSimple(): " + e.toString());
+            e.printStackTrace();
             return 0;
         }
     }
 
-    @Override
     public int ejecutarInsert(String query) {
         try {
             Statement stmt = objConnection.createStatement();
@@ -127,28 +132,9 @@ public class ConexionSQLServer extends Conexion {
             rs.next();
             return rs.getInt(1);
         } catch (SQLException e) {
-            System.out.println("Error al ejecutar el metodo ejecutarInsert() " + e.toString());
+            System.out.println("error al ejecutar" + e.toString());
+//            e.printStackTrace();
             return 0;
-        }
-    }
-
-    @Override
-    public void ejecutarConsulta(String sql) {
-        try {
-            Statement consulta = objConnection.createStatement();
-            consulta.executeUpdate(sql);
-        } catch (SQLException e) {
-
-        }
-    }
-
-    @Override
-    public ResultSet obtenerConsulta(String sql) {
-        try {
-            Statement consulta = objConnection.createStatement();
-            return consulta.executeQuery(sql);
-        } catch (SQLException e) {
-            return null;
         }
     }
 }

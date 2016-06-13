@@ -1,4 +1,4 @@
-package Conexion;
+package DAL;
 
 import java.io.*;
 import org.jdom.*;
@@ -30,70 +30,40 @@ public class Configuracion {
             this.dbName = dbConfig.getChild("db-name").getText();
             this.dbUser = dbConfig.getChild("db-user").getText();
             this.dbPassword = dbConfig.getChild("db-password").getText();
-        } catch (JDOMException | IOException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     public static Configuracion getConfiguracion() {
-        if (config == null) {
-            config = new Configuracion();
-        }
-        return config;
+        return new Configuracion();
     }
 
     public String getDbEngine() {
         return dbEngine;
     }
 
-    public void setDbEngine(String dbEngine) {
-        this.dbEngine = dbEngine;
-    }
-
     public String getDbHost() {
         return dbHost;
-    }
-
-    public void setDbHost(String dbHost) {
-        this.dbHost = dbHost;
     }
 
     public String getDbInstace() {
         return dbInstace;
     }
 
-    public void setDbInstace(String dbInstace) {
-        this.dbInstace = dbInstace;
-    }
-
     public String getDbName() {
         return dbName;
-    }
-
-    public void setDbName(String dbName) {
-        this.dbName = dbName;
     }
 
     public String getDbPassword() {
         return dbPassword;
     }
 
-    public void setDbPassword(String dbPassword) {
-        this.dbPassword = dbPassword;
-    }
-
     public String getDbUser() {
         return dbUser;
     }
 
-    public void setDbUser(String dbUser) {
-        this.dbUser = dbUser;
-    }
-
     public String getDbPort() {
         return dbPort;
-    }
-
-    public void setDbPort(String dbPort) {
-        this.dbPort = dbPort;
     }
 }

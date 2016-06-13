@@ -40,6 +40,7 @@ CREATE TABLE [DML].[Tbl_Transacciones]
 (
 Transaccion_iD		int identity(1,1) not null,
 FechaTransaccion    DATE not null,
+MotivoTransaccion varchar(250) not null,
 Monto			varchar(50) not null,
 Categoria_iD_Fk  	int not null,
 CONSTRAINT PK_Tbl_Transaccion primary key(Transaccion_iD)
@@ -50,11 +51,11 @@ Print 'Finalizando 2 Tabla-Tbl_Transacciones'
 ------------------------------------ Soy Una Barra Separadora :) ----------------------------------------
 Print 'Iniciando 3 Tabla-Tbl_CategoriaTransaccion'
 
-CREATE TABLE [DML].[Tbl_CategoriaTransaccion]
+CREATE TABLE [DML].[Tbl_Categoria]
 (
 Categoria_iD			int identity(1,1) not null,
 TipoCategoria				varchar(250) not null,
-CONSTRAINT PK_Tbl_CategoriaTransaccion primary key(Categoria_iD),
+CONSTRAINT PK_Tbl_Categoria primary key(Categoria_iD),
 )
 Go
 Print 'Finalizando 3 Tabla-Tbl_CategoriaTransaccion'

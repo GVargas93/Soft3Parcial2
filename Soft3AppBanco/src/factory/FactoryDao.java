@@ -1,6 +1,6 @@
-package factory;
+package Factory;
 
-import Conexion.Configuracion;
+import DAL.Configuracion;
 import DAO.*;
 
 public abstract class FactoryDao {
@@ -18,9 +18,13 @@ public abstract class FactoryDao {
         return instancia;
     }
 
-    public abstract CategoriaTransaccionDao getNewCategoriaDao();
+    public abstract CuentaDAO getNewCuentaDAO();
 
-    public abstract TransaccionDao getNewTransaccionDao();
+    public abstract CategoriaDAO getNewCategoriaDao();
+
+    public abstract TransaccionDAO getNewTransaccionDAO();
+
+    public abstract TransferenciaDAO getNewTransferenciaDAO();
 
     private String getDbEngine() {
         return dbEngine;
@@ -29,4 +33,5 @@ public abstract class FactoryDao {
     private void setDbEngine(String dbEngine) {
         this.dbEngine = dbEngine;
     }
+
 }
