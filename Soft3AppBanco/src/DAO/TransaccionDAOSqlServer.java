@@ -20,29 +20,14 @@ public class TransaccionDAOSqlServer extends TransaccionDAO {
     @Override
     public int insert(TransaccionDTO obj) throws Exception {
         Conexion objConexion = Conexion.getOrCreate();
-//  Conexion objConexion = Conexion.getOrCreate();
-//
-//        boolean id;
-//
-//        StringBuilder query = new StringBuilder("{call sp_cuentaInsert(");
-//        query.append("'" + obj.getNombre() + "',");
-//        query.append("'" + obj.getSaldoInicial() + "')");
-//        query.append("}");
-//        id = objConexion.ejecutarInsert(query.toString());
-//        if (id == false) {
-//            throw new Exception("El registro no pudo ser insertado");
-//        }
-//        objConexion.desconectar();
-//        return true;
-        
         int id = 0;
-        StringBuilder query = new StringBuilder("{call DML.Ins_Transacciones(");
+        StringBuilder query = new StringBuilder("INSERT INTO DML.Tbl_Transacciones (FechaTransaccion, Monto,MotivoTransaccion, Categoria_iD_Fk,Cuenta_iD_Fk ) VALUES (");
         query.append("'" + obj.getFecha() + "',");
         query.append("'" + obj.getMonto() + "',");
         query.append("'" + obj.getMotivoTransaccion() + "',");
-        query.append("" + obj.getCategoriaIDFK() + ",");
-        query.append("" + obj.getCuentaIDFK() + ")");
-        query.append("}");
+        query.append(+obj.getCategoriaIDFK() + ",");
+        query.append(+obj.getCuentaIDFK() + ")");
+
         id = objConexion.ejecutarInsert(query.toString());
         if (id == 0) {
             throw new Exception("El registro no pudo ser insertado");
@@ -63,10 +48,10 @@ public class TransaccionDAOSqlServer extends TransaccionDAO {
 
     @Override
     public ArrayList<TransaccionDTO> getList() {
-        ArrayList<TransaccionDTO> registros = new ArrayList<TransaccionDTO>();
+        ArrayList<TransaccionDTO> historial = new ArrayList<TransaccionDTO>();
         try {
             Conexion objConexion = Conexion.getOrCreate();
-            String query = "exec SeleccionarTransaccion";
+            String query = "exec DML.Select_Transaccion";
             ResultSet objResultSet = objConexion.ejecutarSelect(query);
             while (objResultSet.next()) {
 
@@ -89,46 +74,17 @@ public class TransaccionDAOSqlServer extends TransaccionDAO {
                 int cuenta_iD_fk = objResultSet.getInt("Cuenta_iD_Fk");
                 obj.setCuentaIDFK(cuenta_iD_fk);
 
-                registros.add(obj);
+                historial.add(obj);
             }
         } catch (Exception ex) {
 
         }
-        return registros;
+        return historial;
     }
 
     @Override
     public TransaccionDTO get(int id) {
-        try {
-            Conexion objConexion = Conexion.getOrCreate();
-            String query = "exec selectbyId " + id;
-            ResultSet objResultSet = objConexion.ejecutarSelect(query);
-            if (objResultSet.next()) {
-                TransaccionDTO obj = new TransaccionDTO();
-
-                int transaccion_Id = objResultSet.getInt("Transaccion_iD");
-                obj.setTransaccionID(transaccion_Id);
-
-                String fecha = objResultSet.getString("FechaTransaccion");
-                obj.setFecha(fecha);
-
-                String motivoTransaccion = objResultSet.getString("MotivoTransaccion");
-                obj.setFecha(motivoTransaccion);
-
-                String monto = objResultSet.getString("Monto");
-                obj.setMonto(monto);
-
-                int categoria_iD_fk = objResultSet.getInt("Categoria_iD_Fk");
-                obj.setCategoriaIDFK(categoria_iD_fk);
-
-                int cuenta_iD_fk = objResultSet.getInt("Cuenta_iD_Fk");
-                obj.setCuentaIDFK(cuenta_iD_fk);
-                return obj;
-            }
-        } catch (Exception ex) {
-
-        }
-        return null;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
