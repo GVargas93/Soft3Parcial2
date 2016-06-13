@@ -26,5 +26,4 @@ public abstract class CategoriaDAO {
 
     public abstract CategoriaDTO get(int id);
 
-    public abstract CategoriaDTO obtenernombreid(String nombrecategoria);
 }
