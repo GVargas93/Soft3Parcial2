@@ -11,6 +11,8 @@ import DAO.TransaccionDAO;
 import DTO.CuentaDTO;
 import DTO.TransaccionDTO;
 import Factory.FactoryDao;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -42,6 +44,7 @@ public class Cuenta extends javax.swing.JInternalFrame {
         jTextField2 = new javax.swing.JTextField();
         codigo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -60,13 +63,21 @@ public class Cuenta extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, -1));
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 140, -1));
         jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 140, -1));
         jPanel1.add(codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 140, -1));
 
         jLabel1.setText("codigo");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
+
+        jButton2.setText("lista");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 90, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,10 +114,18 @@ public class Cuenta extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ListaCuenta lista = new ListaCuenta();
+        Principal.escritorio.add(lista);
+        lista.toFront();
+        lista.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField codigo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

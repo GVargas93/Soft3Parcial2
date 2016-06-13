@@ -5,6 +5,16 @@
  */
 package soft3appbanco;
 
+import DAO.CuentaDAO;
+import DAO.TransaccionDAO;
+import DTO.CuentaDTO;
+import DTO.TransaccionDTO;
+import Factory.FactoryDao;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.ButtonModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Jose Clavijo
@@ -16,6 +26,7 @@ public class ListaCuenta extends javax.swing.JInternalFrame {
      */
     public ListaCuenta() {
         initComponents();
+        llenarTabla();
     }
 
     /**
@@ -29,36 +40,77 @@ public class ListaCuenta extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        cuenta = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        cuenta.setText("MOSTRAR");
+        cuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cuentaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 958, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(369, 369, 369)
+                .addComponent(cuenta)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(cuenta)
+                .addGap(0, 41, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cuentaActionPerformed
+           llenarTabla();
+    }//GEN-LAST:event_cuentaActionPerformed
 
+    public void llenarTabla() {
+
+        DefaultTableModel newTabla = new DefaultTableModel();
+        newTabla.addColumn("ID");
+        newTabla.addColumn("nro cuenta");
+        newTabla.addColumn("saldo");
+    
+        cuenta.setModel((ButtonModel) newTabla);
+
+        String[] datos = new String[2];
+        CuentaDAO objDao = FactoryDao.getFactoryInstance().getNewCuentaDAO();
+        List<CuentaDTO> lista = new ArrayList();
+        lista = objDao.getList();
+        for (int i = 0; i < lista.size(); i++) {
+            datos[0] = String.valueOf(lista.get(i).getCuentaID());
+            datos[1] = String.valueOf(lista.get(i).getNroCuenta());
+            datos[2] = lista.get(i).getSaldo();
+       
+            newTabla.addRow(datos);
+        }
+
+        cuenta.setModel((ButtonModel) newTabla);
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cuenta;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
