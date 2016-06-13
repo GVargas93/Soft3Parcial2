@@ -26,7 +26,7 @@ public class ListaCuenta extends javax.swing.JInternalFrame {
      */
     public ListaCuenta() {
         initComponents();
-        llenarTabla();
+
     }
 
     /**

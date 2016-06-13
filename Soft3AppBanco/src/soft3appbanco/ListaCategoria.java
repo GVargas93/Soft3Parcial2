@@ -26,7 +26,7 @@ public class ListaCategoria extends javax.swing.JInternalFrame {
      */
     public ListaCategoria() {
         initComponents();
-        llenarTabla();
+     
     }
 
     /**
